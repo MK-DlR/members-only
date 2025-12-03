@@ -3,7 +3,7 @@ TOP members only project
 
 live preview: 
 
-using express and authenticaion
+using express and authentication
 create a members only app 
 where members can write posts 
 and within the app, members can see the author
