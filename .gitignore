@@ -1,6 +1,9 @@
 # Environment variables
 .env
 
+# Dependencies
+node_modules/
+
 # Logs
 changelog.txt
 plan.txt
