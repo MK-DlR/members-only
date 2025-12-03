@@ -53,7 +53,7 @@ app.use((req, res, next) => {
 // routes
 // home/index route (BEFORE other routes)
 app.get("/", (req, res) => {
-  res.render("index"); // or res.send("Welcome!") or res.json({...})
+  res.render("index", { title: "Home" });
 });
 /*
 const authRouter = require("./routes/auth"); // authentication
@@ -67,7 +67,7 @@ app.use("/posts", postsRouter);
 
 // 404 handler, after all routes
 app.use((req, res) => {
-  res.status(404).send("Page not found");
+  res.status(404).render("404", { title: "404 - Page Not Found" });
 });
 
 // error handler, last
