@@ -76,7 +76,6 @@ app.get("/log-in", (req, res) => {
   res.render("log-in", { title: "Log In" });
 });
 
-/*
 // log-out route — uses req.logout callback-style API and redirects to home
 app.get("/log-out", (req, res, next) => {
   req.logout((err) => {
@@ -86,7 +85,6 @@ app.get("/log-out", (req, res, next) => {
     res.redirect("/");
   });
 });
-*/
 
 // membership page
 app.get("/membership", (req, res) => {
