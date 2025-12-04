@@ -55,6 +55,7 @@ app.use((req, res, next) => {
 app.get("/", (req, res) => {
   res.render("index", { title: "Home" });
 });
+
 /*
 const authRouter = require("./routes/auth"); // authentication
 const usersRouter = require("./routes/users"); // users resource
@@ -71,9 +72,21 @@ app.get("/sign-up", (req, res) => {
 });
 
 // login page
-app.get("/login", (req, res) => {
-  res.render("login", { title: "Login" });
+app.get("/log-in", (req, res) => {
+  res.render("log-in", { title: "Log In" });
 });
+
+/*
+// log-out route — uses req.logout callback-style API and redirects to home
+app.get("/log-out", (req, res, next) => {
+  req.logout((err) => {
+    if (err) {
+      return next(err);
+    }
+    res.redirect("/");
+  });
+});
+*/
 
 // membership page
 app.get("/membership", (req, res) => {
