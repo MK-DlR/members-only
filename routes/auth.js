@@ -3,6 +3,7 @@
 // imports
 const express = require("express");
 const router = express.Router();
+const passport = require("passport");
 const authController = require("../controllers/authController");
 const { body } = require("express-validator");
 
@@ -19,10 +20,19 @@ router.post(
   authController.signUpPost
 );
 
-// login page route
+// log in page route
 router.get("/log-in", authController.logInGet);
 
-// log-out route — uses req.logout callback-style API and redirects to home
+// log out route — uses req.logout callback-style API and redirects to home
 router.get("/log-out", authController.logOut);
+
+// log in redirect route
+router.post(
+  "/log-in",
+  passport.authenticate("local", {
+    successRedirect: "/posts",
+    failureRedirect: "/log-in",
+  })
+);
 
 module.exports = router;
