@@ -65,6 +65,11 @@ app.use("/users", usersRouter);
 app.use("/posts", postsRouter);
 */
 
+// sign up form
+app.get("/sign-up", (req, res) => {
+  res.render("sign-up", { title: "Sign Up" });
+});
+
 // 404 handler, after all routes
 app.use((req, res) => {
   res.status(404).render("404", { title: "404 - Page Not Found" });

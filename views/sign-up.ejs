@@ -1,0 +1,23 @@
+<!-- views/sign-up.ejs -->
+
+<%- include('partials/header') %>
+
+<body>
+  <h1>Sign Up</h1>
+  <form action="/sign-up" method="POST">
+    <label for="fname">First Name</label>
+    <input id="fname" name="fname" placeholder="first name" type="text" required /><br>
+    <label for="lname">Last Name</label>
+    <input id="lname" name="lname" placeholder="last name" type="text" required /><br>
+    <label for="username">Username</label>
+    <input id="username" name="username" placeholder="username" type="text" required /><br>
+    <label for="password">Password</label>
+    <input id="password" name="password" placeholder="password" type="password" required /><br>
+    <label for="password">Confirm Password</label>
+    <input id="password" name="password" placeholder="confirm password" type="password" required /><br>
+    membership checkbox here<br>
+    <button type="submit">Sign Up</button>
+  </form>
+</body>
+
+<%- include('partials/footer') %>
