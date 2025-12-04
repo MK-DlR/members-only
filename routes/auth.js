@@ -13,10 +13,36 @@ router.get("/sign-up", authController.signUpGet);
 // verify password matches the repeat
 router.post(
   "/sign-up",
-  body("password").isLength({ min: 5 }),
-  body("passwordConfirmation").custom((value, { req }) => {
-    return value === req.body.password;
-  }),
+  body("fname")
+    .trim()
+    .isLength({ min: 1, max: 50 })
+    .escape()
+    .withMessage("First name is required"),
+
+  body("lname")
+    .trim()
+    .isLength({ min: 1, max: 50 })
+    .escape()
+    .withMessage("Last name is required"),
+
+  body("username")
+    .trim()
+    .isLength({ min: 3, max: 30 })
+    .isAlphanumeric()
+    .withMessage("Username must be 3-30 alphanumeric characters"),
+
+  body("password")
+    .isLength({ min: 8 })
+    .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/)
+    .withMessage(
+      "Password must be at least 8 characters with uppercase, lowercase, and number"
+    ),
+
+  // verify password matches the repeat
+  body("passwordConfirmation")
+    .custom((value, { req }) => value === req.body.password)
+    .withMessage("Passwords must match"),
+
   authController.signUpPost
 );
 

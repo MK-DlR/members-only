@@ -22,8 +22,23 @@ const signUpPost = async (req, res, next) => {
   }
 
   try {
+    // check if username exists
+    const existingUser = await pool.query(
+      "SELECT * FROM users WHERE username = $1",
+      [req.body.username]
+    );
+
+    if (existingUser.rows.length > 0) {
+      return res.status(400).render("sign-up", {
+        title: "Sign Up",
+        errors: [{ msg: "Username already exists" }],
+      });
+    }
+
+    // hash password
     const hashedPassword = await bcrypt.hash(req.body.password, 10);
 
+    // insert new user
     await pool.query(
       "INSERT INTO users (fname, lname, username, password, membership) VALUES ($1, $2, $3, $4, $5)",
       [req.body.fname, req.body.lname, req.body.username, hashedPassword, false]
