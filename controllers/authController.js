@@ -12,15 +12,27 @@ const signUpGet = (req, res) => {
 
 // sign-up handler — inserts a new user into the DB
 const signUpPost = async (req, res, next) => {
+  // check for validation errors
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).render("sign-up", {
+      title: "Sign Up",
+      errors: errors.array(),
+    });
+  }
+
   try {
     const hashedPassword = await bcrypt.hash(req.body.password, 10);
-    await pool.query("INSERT INTO users (username, password) VALUES ($1, $2)", [
-      req.body.username,
-      hashedPassword,
-    ]);
+
+    await pool.query(
+      "INSERT INTO users (fname, lname, username, password, membership) VALUES ($1, $2, $3, $4, $5)",
+      [req.body.fname, req.body.lname, req.body.username, hashedPassword, false]
+    );
+
     res.redirect("/");
   } catch (error) {
-    console.error(error);
+    console.error("Sign up error:", error);
+    console.error("Error details:", error.message);
     next(error);
   }
 };
