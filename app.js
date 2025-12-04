@@ -56,7 +56,7 @@ app.get("/", (req, res) => {
   res.render("index", { title: "Home" });
 });
 
-app.use("/auth", authRouter);
+app.use("/", authRouter);
 
 /*
 const usersRouter = require("./routes/users"); // users resource
