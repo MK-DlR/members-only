@@ -1,11 +1,21 @@
 <!-- views/login.ejs -->
 
-<!-- login form -->
-
 <%- include('partials/header') %>
 
 <body>
-    <h1>i'm the login page</h1>
+  <% if (locals.user) {%>
+    <h1>WELCOME BACK <%= user.username %></h1>
+    <a href="/log-out">LOG OUT</a>
+  <% } else { %>
+    <h1>please log in</h1>
+    <form action="/log-in" method="POST">
+      <label for="username">Username</label>
+      <input id="username" name="username" placeholder="username" type="text" /><br>
+      <label for="password">Password</label>
+      <input id="password" name="password" type="password" /><br>
+      <button type="submit">Log In</button>
+    </form>
+  <%}%>
 </body>
 </html>
 
