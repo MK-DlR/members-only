@@ -66,12 +66,39 @@ app.use("/users", usersRouter);
 app.use("/posts", postsRouter);
 */
 
-// sign up form
+// sign up form route
 app.get("/sign-up", (req, res) => {
   res.render("sign-up", { title: "Sign Up" });
 });
 
-// login page
+// sign-up handler — inserts a new user into the DB
+app.post("/sign-up", async (req, res, next) => {
+  try {
+    const hashedPassword = await bcrypt.hash(req.body.password, 10);
+    await pool.query("INSERT INTO users (username, password) VALUES ($1, $2)", [
+      req.body.username,
+      hashedPassword,
+    ]);
+    res.redirect("/");
+  } catch (error) {
+    console.error(error);
+    next(error);
+  }
+});
+
+// verify password matches the repeat
+app.post(
+  "/sign-up",
+  body("password").isLength({ min: 5 }),
+  body("passwordConfirmation").custom((value, { req }) => {
+    return value === req.body.password;
+  }),
+  (req, res) => {
+    // Handle request
+  }
+);
+
+// login page route
 app.get("/log-in", (req, res) => {
   res.render("log-in", { title: "Log In" });
 });
@@ -86,17 +113,17 @@ app.get("/log-out", (req, res, next) => {
   });
 });
 
-// membership page
+// membership page route
 app.get("/membership", (req, res) => {
   res.render("membership", { title: "Membership" });
 });
 
-// all posts page
+// all posts page route
 app.get("/posts", (req, res) => {
   res.render("posts", { title: "All Posts" });
 });
 
-// create posts page
+// create posts page route
 app.get("/create-post", (req, res) => {
   res.render("create-post", { title: "New Post" });
 });
