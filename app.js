@@ -70,6 +70,26 @@ app.get("/sign-up", (req, res) => {
   res.render("sign-up", { title: "Sign Up" });
 });
 
+// login page
+app.get("/login", (req, res) => {
+  res.render("login", { title: "Login" });
+});
+
+// membership page
+app.get("/membership", (req, res) => {
+  res.render("membership", { title: "Membership" });
+});
+
+// all posts page
+app.get("/posts", (req, res) => {
+  res.render("posts", { title: "All Posts" });
+});
+
+// create posts page
+app.get("/create-post", (req, res) => {
+  res.render("create-post", { title: "New Post" });
+});
+
 // 404 handler, after all routes
 app.use((req, res) => {
   res.status(404).render("404", { title: "404 - Page Not Found" });
