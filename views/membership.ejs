@@ -7,4 +7,10 @@
     <h1>Membership</h1>
     <p>Have a membership code? Use it here!</p>
 
+    <form action="/membership" method="POST">
+      <label for="code">Membership Code</label>
+      <input id="code" name="code" placeholder="membership code" type="text" required /><br>
+      <button type="submit">Activate</button>
+    </form>
+
 <%- include('partials/footer') %>
