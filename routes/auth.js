@@ -23,16 +23,16 @@ router.post(
 // log in page route
 router.get("/log-in", authController.logInGet);
 
-// log out route — uses req.logout callback-style API and redirects to home
-router.get("/log-out", authController.logOut);
-
-// log in redirect route
+// log in POST route - authenticate and redirect back to /log-in
 router.post(
   "/log-in",
   passport.authenticate("local", {
-    successRedirect: "/posts",
+    successRedirect: "/log-in",
     failureRedirect: "/log-in",
   })
 );
+
+// log out route — uses req.logout callback-style API and redirects to home
+router.get("/log-out", authController.logOut);
 
 module.exports = router;
