@@ -10,4 +10,6 @@ const { body } = require("express-validator");
 // membership form route
 router.get("/membership", memberController.membershipGet);
 
+router.post("/membership", memberController.membershipPost);
+
 module.exports = router;
