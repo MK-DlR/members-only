@@ -1,5 +1,14 @@
 <!-- views/partials/footer.ejs -->
 
-    <p>i'm the footer</p>
+    <div class="footer">
+        <% if (currentUser) { %>
+            <a href="/log-out">Log Out</a> | 
+            <a href="/membership">Membership</a>
+        <% } else { %>
+            <a href="/sign-up">Sign Up</a> | 
+            <a href="/log-in">Log In</a>
+        <% } %>
+    </div>
+
     </body>
 </html>

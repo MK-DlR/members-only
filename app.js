@@ -6,6 +6,7 @@ require("dotenv").config();
 // core
 const express = require("express");
 const path = require("path");
+const pool = require("./db/pool");
 // authentication
 const session = require("express-session");
 const passport = require("passport");
@@ -55,8 +56,22 @@ app.use((req, res, next) => {
 
 // routes
 // home/index route (BEFORE other routes)
-app.get("/", (req, res) => {
-  res.render("index", { title: "Home" });
+app.get("/", async (req, res, next) => {
+  try {
+    const result = await pool.query(
+      `SELECT messages.*, users.username 
+      FROM messages 
+      JOIN users ON messages.author_id = users.id 
+      ORDER BY messages.created_at DESC`
+    );
+    res.render("index", {
+      title: "Home",
+      messages: result.rows,
+    });
+  } catch (error) {
+    console.error("Error fetching messages:", error);
+    next(error);
+  }
 });
 
 app.use("/", authRouter);

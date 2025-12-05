@@ -4,12 +4,47 @@
 
   <% if (currentUser && currentUser.membership) { %>
     <h1>Home</h1>
-    <p>MEMBERS VIEW (logged in and membership)</p>
-    posts here with: usernames, timestamps
+
+    <% if (messages.length === 0) { %>
+        <p>No posts found.</p>
+    <% } else { %>
+        <div id="message-list" class="message-list">
+            <% messages.forEach(message => { %>
+                <div class="message"
+                    data-title="<%= message.title %>"
+                    data-text="<%= message.text %>"
+                    data-author="<%= message.author_id %>"
+                    data-created="<%= message.created_at %>">
+                        <h3 class="message-title"><%= message.title %></h3>
+                        <p class="message-author">By <%= message.username %></p>
+                        <p class="message-text"><%= message.text %></p>
+                        <p class="message-timestamp"><%= new Date(message.created_at).toLocaleString() %></p>
+                </div>
+            <% }) %>
+        </div>
+    <% } %>
   <% } else { %>
     <h1>Home</h1>
-    <p>NON-MEMBERS VIEW (logged out and/or non-membership)</p>
-    posts here with: anonymous users, no timestamps
+
+    <% if (messages.length === 0) { %>
+        <p>No posts found.</p>
+    <% } else { %>
+        <div id="message-list" class="message-list">
+            <% messages.forEach(message => { %>
+                <div class="message"
+                    data-title="<%= message.title %>"
+                    data-text="<%= message.text %>"
+                    data-author="<%= message.author_id %>"
+                    data-created="<%= message.created_at %>">
+                        <p class="message-header">
+                            <strong class="message-title"><%= message.title %></strong><br>
+                            <p class="message-author">By Anonymous</p>
+                        </p>
+                        <p class="message-text"><%= message.text %></p>
+                </div>
+            <% }) %>
+        </div>
+    <% } %>
   <% } %>
 
 <%- include('partials/footer') %>
