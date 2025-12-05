@@ -14,9 +14,23 @@
   
   <form action="/create-post" method="POST">
     <label for="title">Title</label>
-    <input id="title" name="title" placeholder="title" type="text" required /><br>
+    <input 
+      id="title" 
+      name="title" 
+      placeholder="Title" 
+      type="text" 
+      value="<%= locals.formData?.title || '' %>"
+      required 
+    /><br>
+    
     <label for="text">Post</label>
-    <textarea id="text" name="text" placeholder="post" required></textarea><br>
+    <textarea 
+      id="text" 
+      name="text" 
+      placeholder="Write your post here..." 
+      required
+    ><%= locals.formData?.text || '' %></textarea><br>
+    
     <button type="submit">Create Post</button>
   </form>
 
