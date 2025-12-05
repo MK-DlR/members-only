@@ -11,6 +11,11 @@ const session = require("express-session");
 const passport = require("passport");
 // require routers
 const authRouter = require("./routes/auth");
+const memberRouter = require("./routes/membership");
+/*
+const usersRouter = require("./routes/users"); 
+const postsRouter = require("./routes/posts"); 
+*/
 
 // passport config
 const initializePassport = require("./config/passport");
@@ -57,19 +62,12 @@ app.get("/", (req, res) => {
 });
 
 app.use("/", authRouter);
+app.use("/", memberRouter);
 
 /*
-const usersRouter = require("./routes/users"); // users resource
-const postsRouter = require("./routes/posts"); // posts resource
-
 app.use("/users", usersRouter);
 app.use("/posts", postsRouter);
 */
-
-// membership page route
-app.get("/membership", (req, res) => {
-  res.render("membership", { title: "Membership" });
-});
 
 // all posts page route
 app.get("/posts", (req, res) => {
