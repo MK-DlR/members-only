@@ -6,10 +6,11 @@ const router = express.Router();
 const passport = require("passport");
 const memberController = require("../controllers/membershipController");
 const { body } = require("express-validator");
+const { requireAuth } = require("../middleware/auth");
 
 // membership form route
-router.get("/membership", memberController.membershipGet);
+router.get("/membership", requireAuth, memberController.membershipGet);
 
-router.post("/membership", memberController.membershipPost);
+router.post("/membership", requireAuth, memberController.membershipPost);
 
 module.exports = router;

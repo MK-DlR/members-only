@@ -1,31 +1,29 @@
 <!-- views/membership.ejs -->
-
-<!-- this page should only be visible to logged in users -->
-
+ 
 <%- include('partials/header') %>
 
-    <h1>Membership</h1>
+<h1>Membership</h1>
 
-    <% if (locals.errors) { %>
-      <div class="errors">
-        <% errors.forEach(error => { %>
-          <p style="color: red;"><%= error.msg %></p>
-        <% }); %>
-      </div>
-    <% } else if (locals.success) { %>
-      <div class="success">
-        <% success.forEach(success => { %>
-          <p style="color: green;"><%= success.msg %></p>
-        <% }); %>
-      </div>
-    <% }; %>
+<% if (locals.errors) { %>
+  <div class="errors">
+    <% errors.forEach(error => { %>
+      <p style="color: red;"><%= error.msg %></p>
+    <% }); %>
+  </div>
+<% } else if (locals.success) { %>
+  <div class="success">
+    <% success.forEach(success => { %>
+      <p style="color: green;"><%= success.msg %></p>
+    <% }); %>
+  </div>
+<% }; %>
 
-    <p>Have a membership code? Use it here!</p>
+<p>Have a membership code? Use it here!</p>
 
-    <form action="/membership" method="POST">
-      <label for="code">Membership Code</label>
-      <input id="code" name="code" placeholder="membership code" type="text" required /><br>
-      <button type="submit">Activate</button>
-    </form>
+<form action="/membership" method="POST">
+  <label for="code">Membership Code</label>
+  <input id="code" name="code" placeholder="membership code" type="text" required /><br>
+  <button type="submit">Activate</button>
+</form>
 
 <%- include('partials/footer') %>
