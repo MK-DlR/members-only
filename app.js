@@ -69,11 +69,6 @@ app.use("/users", usersRouter);
 app.use("/posts", postsRouter);
 */
 
-// all posts page route
-app.get("/posts", (req, res) => {
-  res.render("posts", { title: "All Posts" });
-});
-
 // create posts page route
 app.get("/create-post", (req, res) => {
   res.render("create-post", { title: "New Post" });
