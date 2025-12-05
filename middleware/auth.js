@@ -1,7 +1,5 @@
 // middleware/auth.js
 
-// authentication middleware
-
 // check if user is logged in before accessing certain routes
 function requireAuth(req, res, next) {
   if (!req.user) {
@@ -10,4 +8,15 @@ function requireAuth(req, res, next) {
   next();
 }
 
-module.exports = { requireAuth };
+// check if user is a member before accessing certain routes
+function requireMember(req, res, next) {
+  if (!req.user) {
+    return res.redirect("/log-in");
+  }
+  if (req.user.membership === false) {
+    return res.redirect("/membership");
+  }
+  next();
+}
+
+module.exports = { requireAuth, requireMember };

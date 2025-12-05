@@ -12,10 +12,8 @@ const passport = require("passport");
 // require routers
 const authRouter = require("./routes/auth");
 const memberRouter = require("./routes/membership");
-/*
-const usersRouter = require("./routes/users"); 
-const postsRouter = require("./routes/posts"); 
-*/
+const createPostRouter = require("./routes/create-post");
+// const usersRouter = require("./routes/users");
 
 // passport config
 const initializePassport = require("./config/passport");
@@ -63,16 +61,8 @@ app.get("/", (req, res) => {
 
 app.use("/", authRouter);
 app.use("/", memberRouter);
-
-/*
-app.use("/users", usersRouter);
-app.use("/posts", postsRouter);
-*/
-
-// create posts page route
-app.get("/create-post", (req, res) => {
-  res.render("create-post", { title: "New Post" });
-});
+app.use("/", createPostRouter);
+// app.use("/users", usersRouter);
 
 // 404 handler, after all routes
 app.use((req, res) => {
