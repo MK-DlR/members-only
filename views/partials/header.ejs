@@ -9,9 +9,10 @@
 </head>
 <body>
     <% if (currentUser) { %>
-        <b>Logged in as: <%= currentUser.username %></b> |
+        <b>Welcome, <%= currentUser.username %></b> |
         <a href="/">Home</a> | 
         <a href="/posts">All Posts</a> |
+        <a href="/create-post">New Post</a> |
         <a href="/log-out">Log Out</a> | 
         <a href="/membership">Membership</a>
     <% } else { %>
