@@ -2,7 +2,14 @@
 
 <%- include('partials/header') %>
 
+  <% if (currentUser && currentUser.membership) { %>
     <h1>Home</h1>
-    <p>i'm the home page</p>
+    <p>MEMBERS VIEW (logged in and membership)</p>
+    posts here with: usernames, timestamps
+  <% } else { %>
+    <h1>Home</h1>
+    <p>NON-MEMBERS VIEW (logged out and/or non-membership)</p>
+    posts here with: anonymous users, no timestamps
+  <% } %>
 
 <%- include('partials/footer') %>
