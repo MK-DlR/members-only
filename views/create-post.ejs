@@ -2,7 +2,22 @@
 
 <%- include('partials/header') %>
 
-    <h1>Create New Post</h1>
-    <p>i'm the create post page</p>
+  <h1>Create A New Post</h1>
+  
+  <% if (locals.errors) { %>
+    <div class="errors">
+      <% errors.forEach(error => { %>
+        <p style="color: red;"><%= error.msg %></p>
+      <% }); %>
+    </div>
+  <% } %>
+  
+  <form action="/create-post" method="POST">
+    <label for="title">Title</label>
+    <input id="title" name="title" placeholder="title" type="text" required /><br>
+    <label for="text">Post</label>
+    <textarea id="text" name="text" placeholder="post" required></textarea><br>
+    <button type="submit">Create Post</button>
+  </form>
 
 <%- include('partials/footer') %>
