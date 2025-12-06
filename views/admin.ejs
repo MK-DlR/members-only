@@ -18,12 +18,17 @@
   </div>
 <% }; %>
 
-<p>Have an administrator access code? Use it here!</p>
+<% if (currentUser && currentUser.admin) { %>
+  <p>You've already redeemed an administrator access code!</p>
 
-<form action="/admin" method="POST">
-  <label for="admin_code">Administrator Code</label>
-  <input id="admin_code" name="admin_code" placeholder="admin code" type="text" required /><br>
-  <button type="submit">Activate</button>
-</form>
+<% } else { %>
+  <p>Have an administrator access code? Use it here!</p>
+
+  <form action="/admin" method="POST">
+    <label for="admin_code">Administrator Code</label>
+    <input id="admin_code" name="admin_code" placeholder="admin code" type="text" required /><br>
+    <button type="submit">Activate</button>
+  </form>
+<% }; %>
 
 <%- include('partials/footer') %>
