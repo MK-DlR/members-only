@@ -13,8 +13,8 @@ const passport = require("passport");
 // require routers
 const authRouter = require("./routes/auth");
 const memberRouter = require("./routes/membership");
+const adminRouter = require("./routes/admin");
 const createPostRouter = require("./routes/create-post");
-// const usersRouter = require("./routes/users");
 
 // passport config
 const initializePassport = require("./config/passport");
@@ -76,8 +76,8 @@ app.get("/", async (req, res, next) => {
 
 app.use("/", authRouter);
 app.use("/", memberRouter);
+app.use("/", adminRouter);
 app.use("/", createPostRouter);
-// app.use("/users", usersRouter);
 
 // 404 handler, after all routes
 app.use((req, res) => {
