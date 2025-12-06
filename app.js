@@ -74,6 +74,16 @@ app.get("/", async (req, res, next) => {
   }
 });
 
+// log-out route — uses req.logout callback-style API and redirects to home
+app.get("/log-out", (req, res, next) => {
+  req.logout((err) => {
+    if (err) {
+      return next(err);
+    }
+    res.redirect("/");
+  });
+});
+
 app.use("/", authRouter);
 app.use("/", memberRouter);
 app.use("/", adminRouter);
