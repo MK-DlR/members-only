@@ -3,11 +3,11 @@
 const { Pool } = require("pg");
 
 const pool = new Pool({
-  user: "milkteapuppy",
-  host: "localhost",
-  database: "members_only",
-  password: "0607",
-  port: 5432,
+  connectionString: process.env.DATABASE_URL,
+  ssl:
+    process.env.NODE_ENV === "production"
+      ? { rejectUnauthorized: false }
+      : false,
 });
 
 module.exports = pool;
