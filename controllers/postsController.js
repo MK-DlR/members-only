@@ -66,7 +66,29 @@ const newPostPost = [
   },
 ];
 
+// delete post handler
+const deletePost = async (req, res) => {
+  // check if user is logged in
+  if (!req.user) {
+    return res.redirect("/login");
+  } else if (!req.user.admin) {
+    // check if user is admin
+    res.status(403).send("User is not authorized");
+  } else {
+    const postId = req.params.id;
+    try {
+      // delete message
+      await pool.query("DELETE FROM messages WHERE id = $1", [postId]);
+      // redirect back to index page
+      res.redirect("/");
+    } catch (err) {
+      res.status(500).send("Error deleting post");
+    }
+  }
+};
+
 module.exports = {
   newPostGet,
   newPostPost,
+  deletePost,
 };

@@ -4,8 +4,6 @@
 
   <% if (currentUser && currentUser.admin) { %>
     <h1>Home</h1>
-
-    <p>you're an admin!</p>
     
     <% if (messages.length === 0) { %>
         <p>No posts found.</p>
@@ -21,6 +19,12 @@
                         <p class="message-author">By <%= message.username %></p>
                         <p class="message-text"><%= message.text %></p>
                         <p class="message-timestamp"><%= new Date(message.created_at).toLocaleString() %></p>
+                        
+                        <form action="<%- message.id %>/delete" method="POST" onsubmit="return confirm('Are you sure to want to delete this post?');">
+                            <button type="submit">
+                                Delete
+                            </button>
+                        </form>
                 </div>
             <% }) %>
         </div>

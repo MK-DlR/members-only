@@ -13,4 +13,7 @@ router.get("/create-post", requireAuth, postsController.newPostGet);
 
 router.post("/create-post", requireAuth, postsController.newPostPost);
 
+// delete post route
+router.post("/:id/delete", requireAuth, postsController.deletePost);
+
 module.exports = router;
