@@ -1,7 +1,11 @@
 <!-- views/partials/footer.ejs -->
 
     <div class="footer">
-        <% if (currentUser) { %>
+        <% if (currentUser && currentUser.membership) { %>
+            <a href="/log-out">Log Out</a> | 
+            <a href="/membership">Membership</a> |
+            <a href="/admin">Admin</a>
+        <% } else if (currentUser) { %>
             <a href="/log-out">Log Out</a> | 
             <a href="/membership">Membership</a>
         <% } else { %>
